@@ -56,7 +56,7 @@ const Navbar = () => {
       </nav>
 
       {/* Mobile Menu */}
-      <div id="mobileMenu" className='md:hidden bg-slate-600 text-white px-4 py-3 transition-all duration-300 flex justify-between'>
+      <div id="mobileMenu" className='md:hidden bg-slate-700 text-white px-4 py-2 transition-all duration-300 flex justify-between'>
         <div className='mt-1'>
           <Link href="/" className="text-xl mx-2 hover:text-gray-300 transition duration-200">
             Home
@@ -68,15 +68,12 @@ const Navbar = () => {
         <div>
           {!token ? (
             <div className='mt-1'>
-              <Link href="/login" className="bg-white text-black px-4 py-2 mx-2 rounded-lg shadow-lg hover:bg-gray-400 transition duration-200">
-                Login
-              </Link>
               <Link href="/signup" className="bg-blue-600 text-white px-4 py-2 mx-2 rounded-lg shadow-lg hover:bg-blue-500 transition duration-200">
                 Signup
               </Link>
             </div>
           ) : (
-            <button onClick={handleLogout} className="bg-blue-600 text-white px-4 py-2 mx-1 rounded-lg shadow-lg hover:bg-blue-500 transition duration-200">
+            <button onClick={handleLogout} className="bg-blue-600 text-white px-4 py-1 mx-1 rounded-lg shadow-lg hover:bg-blue-500 transition duration-200">
               Logout
             </button>
           )}

@@ -94,7 +94,7 @@ function AddLog() {
             </h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {logs.map((exercise) => (
-                <div key={exercise.exercise_name} className="bg-gray-50 p-6 rounded-xl shadow-lg transform hover:scale-105 transition-all hover:shadow-xl">
+                <div key={exercise.exercise_name} className="bg-gray-50 text-black p-6 rounded-xl shadow-lg transform hover:scale-105 transition-all hover:shadow-xl">
                   <div className="flex flex-col justify-between h-full">
                     <div>
                       <h5 className="text-2xl font-semibold text-gray-800">{exercise.exercise_name}</h5>

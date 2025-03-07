@@ -26,7 +26,7 @@ function Alert() {
     : 'bg-blue-400'; 
     
   return (
-    <div className={`${alertTypeClass} h-12 flex justify-center items-center shadow-md transition-all duration-300 ease-in-out transform sticky top-28 md:top-16 z-50`}>
+    <div className={`${alertTypeClass} h-12 flex justify-center items-center shadow-md transition-all duration-300 ease-in-out transform sticky top-24 md:top-16 z-50`}>
       <strong>
         <p className="text-white text-lg font-semibold">{alert.message}</p>
       </strong>

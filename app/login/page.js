@@ -8,7 +8,7 @@ import Alert from '../components/Alert';
 
 function login() {
 
-  const { alert, setAlert, error, setError } = useMyContext();
+  const { setAlert, setError } = useMyContext();
   const [credentials, setCredentials] = useState({ email: '', password: '' })
   const [loading, setLoading] = useState(false)
   let route = useRouter();
@@ -48,26 +48,6 @@ function login() {
   }
 }
 
-if (error) {
-  return (
-    <>
-      <Navbar />
-      <Alert />
-      <main className="flex-1 p-1 pb-12 bg-gray-100 flex justify-center">
-        <div className="flex flex-col justify-center items-center">
-          <p className="text-red-500 text-xl font-semibold">{error}</p>
-          <p className="text-red-500 text-xl font-semibold">Something went wrong! Please try again later.</p>
-          <button className='bg-blue-500 text-white mt-2 px-6 py-2 rounded-lg shadow-md hover:bg-blue-400 transition duration-200' onClick={() => {
-            window.location.reload()
-          }}>
-            Try Again
-          </button>
-        </div>
-      </main>
-    </>
-  );
-}
-
   return (
     <>
       <Navbar />
@@ -81,7 +61,7 @@ if (error) {
                   <div className="text-center mb-4">
                     <h2 className="text-3xl font-semibold text-gray-800">Login</h2>
                   </div>
-                  <form onSubmit={handleSubmit}>
+                  <form onSubmit={handleSubmit} className="text-black">
                     <div className="mb-4">
                       <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email address</label>
                       <input

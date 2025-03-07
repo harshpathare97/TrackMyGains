@@ -58,7 +58,7 @@ export default function ResetPasswordPage() {
                 <div className="container mx-auto my-auto">
                     <div className="flex justify-center">
                         <div className="w-full sm:w-96 lg:w-80">
-                            <div className="bg-white shadow-sm border-0 rounded-3xl p-6">
+                            <div className="bg-white text-black shadow-sm border-0 rounded-3xl p-6">
                                 <div className="text-center mb-4">
                                     <h2 className="text-3xl font-semibold text-gray-800">Reset Password</h2>
                                 </div>

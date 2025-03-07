@@ -1,5 +1,6 @@
 "use client";
 import React from 'react'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation';
 import { useMyContext } from '../context/MyContext';
 
@@ -55,7 +56,7 @@ function signup() {
                                 <div className="text-center mb-4">
                                     <h2 className="text-3xl font-semibold text-gray-800">Sign-up</h2>
                                 </div>
-                                <form onSubmit={handleSubmit}>
+                                <form onSubmit={handleSubmit} className="text-black">
                                     <div className="mb-4">
                                         <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
                                         <input
@@ -113,6 +114,9 @@ function signup() {
                                     >
                                         {loading ? 'Submiting...' : 'Submit'}
                                     </button>
+                                    <div className="my-3 text-center">
+                                        <p className="text-gray-700">You have account<Link href={"/login"} className='text-blue-700 hover:text-blue-500'> Login</Link></p>
+                                    </div>
                                 </form>
                             </div>
                         </div>

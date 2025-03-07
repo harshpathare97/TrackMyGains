@@ -123,14 +123,12 @@ function AddExercise() {
 
       {/* Modal */}
       {modalOpen && (
-        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50" onClick={() => { closeModal(); /*localStorage.removeItem('editWorkout')*/ setData([]); }}>
-          <div
-            className="modal-dialog bg-white rounded-lg shadow-xl p-6 w-full sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl"
-            onClick={(e) => e.stopPropagation()}
-          >
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50" onClick={() => { closeModal(); setData([]); }}>
+          <div className="modal-dialog text-black bg-white rounded-lg shadow-xl p-6 w-full sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl"
+            onClick={(e) => e.stopPropagation()}>
             <div className="modal-header flex justify-between items-center border-b p-2">
               <h5 className="modal-title text-2xl font-semibold text-gray-800">{data.exercises ? 'Edit Workout' : 'Add Workout'}</h5>
-              <button type="button" className="text-gray-500 hover:text-gray-700" onClick={() => { closeModal(); /*localStorage.removeItem('editWorkout')*/ setData([]); }}>
+              <button type="button" className="text-gray-500 hover:text-gray-700" onClick={() => { closeModal(); setData([]); }}>
                 <span className="text-2xl">&times;</span>
               </button>
             </div>
