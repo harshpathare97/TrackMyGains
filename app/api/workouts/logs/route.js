@@ -12,7 +12,6 @@ export const POST = authenticate(async (req) => {
     const workoutLog = await WorkoutLog.findById( id );
 
     if (!workoutLog) {
-      console.log('Workout log not found!');
       return new Response(
         JSON.stringify({ error: 'Workout log not found' }),
         { status: 404 }
@@ -25,7 +24,6 @@ export const POST = authenticate(async (req) => {
       const exerciselog = workoutLog.workoutLogs.find(
         log => log.exerciseName === exercise.exercise_name
       );
-      console.log(exerciselog)
       if (exerciselog) {
         exerciselog.logs.push({ date: new Date(), sets: exercise.sets });
       }

@@ -25,7 +25,7 @@ export const GET = authenticate(async (req) => {
 // Handle POST request - add data
 export const POST = authenticate(async (req) => {
   let success = true
-  const { workoutName, exercise_list } = await req.json();
+  const { workoutName, exercises } = await req.json();
   try {
     await connectToMongoDB();
 
@@ -39,7 +39,7 @@ export const POST = authenticate(async (req) => {
     }
 
     // Convert the array to an array of objects with the exercise name
-    const workoutLogs = exercise_list.map(exercise_name => ({
+    const workoutLogs = exercises.map(exercise_name => ({
       exerciseName: exercise_name,
       logs: []
     }));
@@ -54,7 +54,8 @@ export const POST = authenticate(async (req) => {
     const result = {
       id: newWorkout._id,
       workoutName: workoutName,
-      exercises: exercise_list,
+      exercises: exercises,
+      workoutLogs: newWorkout.workoutLogs
     };
 
     success = true
@@ -89,7 +90,7 @@ export const PUT = authenticate(async (req) => {
     if (workoutLog.workoutName !== workoutName){
       await workoutLog.set({workoutName : workoutName});
     }
-
+    
     // Delete exercises from the workoutLogs array
     if (deleteExercises && deleteExercises.length > 0) {
       await WorkoutLog.updateMany(
@@ -97,7 +98,7 @@ export const PUT = authenticate(async (req) => {
         { $pull: { workoutLogs: { exerciseName: { $in: deleteExercises } } } }
       );
     }
-    
+
     // Add new exercises to existing workout log
     const workoutLogs = updateExercises.map(exercise => ({
       exerciseName: exercise,
@@ -108,9 +109,12 @@ export const PUT = authenticate(async (req) => {
     // Save the updated workout log
     await workoutLog.save();
 
+    // Reload the document from the database to get the most up-to-date version
+    const log = await WorkoutLog.findById(id);
+
     success = true;
     return new Response(
-      JSON.stringify({ message: 'Workout log updated successfully', success }),
+      JSON.stringify({ message: 'Workout log updated successfully', success, log }),
       { status: 200 }
     );
   } catch (error) {

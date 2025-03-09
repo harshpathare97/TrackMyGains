@@ -1,10 +1,8 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import { useMyContext } from '../context/MyContext';
 
 function AddLog() {
-  const router = useRouter();
   const [logs, setLogs] = useState([]);
   const [workout, setWorkout] = useState([]);
   const { addLogs, data, setAlert } = useMyContext();
@@ -20,21 +18,26 @@ function AddLog() {
         ],
       }));
       setLogs(exerciseData);
-      setWorkout({ id: data.id, workoutName: data.workoutName })
+      setWorkout({ id: data.id, workoutName: data.workoutName });
     }
   }, []);
 
   // Handle the input change for each set
   const handleChange = (e, exerciseName, index, field) => {
-    const updatedExercises = logs.map((exercise) => {
-      if (exercise.exercise_name === exerciseName) {
-        const updatedSets = [...exercise.sets];
-        updatedSets[index][field] = e.target.value;
-        return { ...exercise, sets: updatedSets };
-      }
-      return exercise;
-    });
-    setLogs(updatedExercises);
+    const value = e.target.value;
+
+    // Only update if the input value is numeric and doesn't exceed 3 digits
+    if (/^\d{0,3}$/.test(value)) {
+      const updatedExercises = logs.map((exercise) => {
+        if (exercise.exercise_name === exerciseName) {
+          const updatedSets = [...exercise.sets];
+          updatedSets[index][field] = value;
+          return { ...exercise, sets: updatedSets };
+        }
+        return exercise;
+      });
+      setLogs(updatedExercises);
+    }
   };
 
   // Add a new set to the exercise
@@ -59,6 +62,12 @@ function AddLog() {
       }
       return exercise;
     });
+    setLogs(updatedExercises);
+  };
+
+  // Remove an entire exercise from the log
+  const handleRemoveExercise = (exerciseName) => {
+    const updatedExercises = logs.filter((exercise) => exercise.exercise_name !== exerciseName);
     setLogs(updatedExercises);
   };
 
@@ -97,7 +106,15 @@ function AddLog() {
                 <div key={exercise.exercise_name} className="bg-gray-50 text-black p-6 rounded-xl shadow-lg transform hover:scale-105 transition-all hover:shadow-xl">
                   <div className="flex flex-col justify-between h-full">
                     <div>
+                      <div className='flex justify-between'>
                       <h5 className="text-2xl font-semibold text-gray-800">{exercise.exercise_name}</h5>
+                      <button
+                          onClick={() => handleRemoveExercise(exercise.exercise_name)}
+                          className=" text-red-500 w-10 h-10 px-2 py-1 rounded-md hover:bg-red-500 hover:text-white"
+                        >
+                          X
+                        </button>
+                      </div>
                       <form onSubmit={handleSubmit}>
                         <table className="table-auto w-full text-center text-lg mt-2">
                           <thead>

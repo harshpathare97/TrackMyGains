@@ -11,12 +11,12 @@ const Navbar = () => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     setToken(token);
-  }, []); 
+  }, []);
 
   const handleLogout = () => {
     localStorage.clear();
-    setToken(null); 
-    route.push("/login");
+    setToken(null);
+    //route.push("/login");
   };
 
   return (
@@ -48,34 +48,32 @@ const Navbar = () => {
           </div>
         ) : (
           <div className="hidden md:flex space-x-6">
-            <button onClick={handleLogout} className="bg-blue-600 text-white px-4 py-2 ml-24 mx-1 rounded-lg shadow-lg hover:bg-blue-500 transition duration-200">
+            <Link href='/login' onClick={handleLogout} className="bg-blue-600 text-white px-4 py-2 ml-24 mx-1 rounded-lg shadow-lg hover:bg-blue-500 transition duration-200">
               Logout
-            </button>
+            </Link>
           </div>
         )}
       </nav>
 
       {/* Mobile Menu */}
       <div id="mobileMenu" className='md:hidden bg-slate-700 text-white px-4 py-2 transition-all duration-300 flex justify-between'>
-        <div className='mt-1'>
-          <Link href="/" className="text-xl mx-2 hover:text-gray-300 transition duration-200">
+        <div>
+          <Link href="/" className="lg:text-xl mx-2 hover:text-gray-300 transition duration-200">
             Home
           </Link>
-          <Link href="/about" className="text-xl mx-2 hover:text-gray-300 transition duration-200">
+          <Link href="/about" className="lg:text-xl mx-2 hover:text-gray-300 transition duration-200">
             About
           </Link>
         </div>
         <div>
           {!token ? (
-            <div className='mt-1'>
-              <Link href="/signup" className="bg-blue-600 text-white px-4 py-2 mx-2 rounded-lg shadow-lg hover:bg-blue-500 transition duration-200">
-                Signup
-              </Link>
-            </div>
+            <Link href="/signup" className="bg-blue-600 text-white px-2 py-1 pt-1 mx-1 rounded-lg shadow-lg hover:bg-blue-500 transition duration-200">
+              Signup
+            </Link>
           ) : (
-            <button onClick={handleLogout} className="bg-blue-600 text-white px-4 py-1 mx-1 rounded-lg shadow-lg hover:bg-blue-500 transition duration-200">
+            <Link href='/login' onClick={handleLogout} className="bg-blue-600 text-white px-2 py-1 mx-1 rounded-lg shadow-lg hover:bg-blue-500 transition duration-200">
               Logout
-            </button>
+            </Link>
           )}
         </div>
       </div>

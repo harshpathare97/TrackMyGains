@@ -8,7 +8,7 @@ export const MyProvider = ({ children }) => {
   const router = useRouter();
   const [error, setError] = useState(null);
   const [alert, setAlert] = useState(null);
-  const [workout, setWorkout] = useState([]);
+  const [workouts, setWorkouts] = useState([]);
   const [data, setData] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const openModal = () => setModalOpen(true);
@@ -24,7 +24,7 @@ export const MyProvider = ({ children }) => {
         }});
       const data = await response.json();
       if (data.result){
-        setWorkout(data.result);
+        setWorkouts(data.result);
         setData([])
       } else {
         setError("Failed Fetch Workout.");
@@ -35,7 +35,7 @@ export const MyProvider = ({ children }) => {
     }
   };
   
-  const addWorkout = async (workoutName, exercise_list) => {
+  const addWorkout = async (workout) => {
     try {
       const response = await fetch(`/api/workouts`, {
         method: 'POST',
@@ -43,12 +43,12 @@ export const MyProvider = ({ children }) => {
           'Content-Type': 'application/json',
           'auth-token': localStorage.getItem('token')
       },
-      body: JSON.stringify({workoutName, exercise_list}),
+      body: JSON.stringify({workoutName: workout.workoutName, exercises:workout.exercises}),
       });
       const res = await response.json();
       if (res.success){
         closeModal();
-        setWorkout(workout.concat(res.result))
+        setWorkouts(workouts.concat(res.result))
         setAlert({message: res.message, type: "success"})
       } else{
         closeModal();
@@ -59,7 +59,7 @@ export const MyProvider = ({ children }) => {
   }
   };
 
-  const editWorkout = async (id, workoutName, exercise_list, deleteExercises, updateExercises) => {
+  const editWorkout = async (id, workout, deleteExercises, updateExercises) => {
     try {
       const response = await fetch(`/api/workouts`, {
         method: 'PUT',
@@ -67,21 +67,22 @@ export const MyProvider = ({ children }) => {
           'Content-Type': 'application/json',
           'auth-token': localStorage.getItem('token')
       },
-      body: JSON.stringify({id, workoutName, deleteExercises, updateExercises}),
+      body: JSON.stringify({id, workoutName: workout.workoutName, deleteExercises, updateExercises}),
       });
       const res = await response.json();
       if (res.success){
-        let newWorkout = JSON.parse(JSON.stringify(workout))
+        let newWorkout = JSON.parse(JSON.stringify(workouts))
         for (let index = 0; index < newWorkout.length; index++){
           const element = newWorkout[index];
           if (element.id === id) {
-            element.workoutName = workoutName
-            element.exercises = exercise_list;
+            element.workoutName = workout.workoutName
+            element.exercises = workout.exercises
+            element.workoutLogs = res.log.workoutLogs
             break
           }
         }
         closeModal();
-        setWorkout(newWorkout)
+        setWorkouts(newWorkout)
         setAlert({message: res.message, type: "success"})
         setData([])
       } else{
@@ -106,7 +107,7 @@ export const MyProvider = ({ children }) => {
       });
       const res = await response.json();
       if (res.success){
-        setWorkout((prevWorkouts) => prevWorkouts.filter((workout) => workout.id !== id));
+        setWorkouts((prevWorkouts) => prevWorkouts.filter((workouts) => workouts.id !== id));
         setAlert({message: res.message, type: "success"})
       } else{
         setAlert({message: res.error, type: "danger"})
@@ -159,7 +160,7 @@ export const MyProvider = ({ children }) => {
   }
   
   return (
-    <MyContext.Provider value={{ workout, error, setError, alert, setAlert, data, setData, modalOpen, openModal, closeModal, fetchWorkouts, addWorkout, editWorkout, deleteWorkout, addLogs }}>
+    <MyContext.Provider value={{ workouts, error, setError, alert, setAlert, data, setData, modalOpen, openModal, closeModal, fetchWorkouts, addWorkout, editWorkout, deleteWorkout, addLogs }}>
       {children}
     </MyContext.Provider>
   );

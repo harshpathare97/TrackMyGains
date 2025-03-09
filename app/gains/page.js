@@ -42,7 +42,7 @@ export default function Gains() {
     <main className="flex-1 p-1 pb-12 bg-gray-100">
       <div className="flex flex-col justify-center items-center">
         <div className="container py-1 px-2 lg:px-8">
-          <div className="w-full mx-auto lg:w-11/12 lg:bg-white lg:shadow-lg rounded-lg lg:p-8">
+          <div className="w-full mx-auto lg:w-11/12 text-black lg:bg-white lg:shadow-lg rounded-lg lg:p-8">
             <h1 className="text-4xl font-semibold text-center text-gray-900 mb-6">
               {data.workoutName}
             </h1>
