@@ -26,19 +26,22 @@ function AddLog() {
   const handleChange = (e, exerciseName, index, field) => {
     const value = e.target.value;
 
-    // Only update if the input value is numeric and doesn't exceed 3 digits
-    if (/^\d{0,3}$/.test(value)) {
-      const updatedExercises = logs.map((exercise) => {
-        if (exercise.exercise_name === exerciseName) {
-          const updatedSets = [...exercise.sets];
-          updatedSets[index][field] = value;
-          return { ...exercise, sets: updatedSets };
-        }
-        return exercise;
-      });
-      setLogs(updatedExercises);
+    const handleChange = (e, exerciseName, index, field) => {
+    const value = e.target.value;
+
+    // Allow numbers up to 3 digits with optional 1 decimal place, no leading zeros, no single "0"
+    if (/^([1-9]\d{0,2})(\.\d{0,1})?$/.test(value)) {
+        const updatedExercises = logs.map((exercise) => {
+            if (exercise.exercise_name === exerciseName) {
+                const updatedSets = [...exercise.sets];
+                updatedSets[index][field] = value;
+                return { ...exercise, sets: updatedSets };
+            }
+            return exercise;
+        });
+        setLogs(updatedExercises);
     }
-  };
+};
 
   // Add a new set to the exercise
   const handleAddSet = (exerciseName) => {
