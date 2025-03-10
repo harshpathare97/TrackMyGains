@@ -1,5 +1,5 @@
 {
-    "chest": [
+    "Chest": [
       "Barbell Bench Press (Flat)",
       "Barbell Bench Press (Incline)",
       "Barbell Bench Press (Decline)",
@@ -18,7 +18,7 @@
       "Landmine Chest Press",
       "Single-Arm Dumbbell Chest Press"
     ],
-    "back": [
+    "Back": [
       "Deadlifts (Conventional)",
       "Deadlifts (Romanian)",
       "Deadlifts (Sumo)",
@@ -34,12 +34,13 @@
       "Chest-Supported Rows",
       "Face Pulls (Cable)",
       "Barbell Shrugs",
+      "Dumbbell Shrugs",
       "Rack Pulls",
       "Reverse Flys (Dumbbell)",
       "Reverse Flys (Cable)",
       "Wide-Grip Cable Rows"
     ],
-    "shoulders": [
+    "Shoulder": [
       "Overhead Press (Barbell)",
       "Overhead Press (Dumbbell)",
       "Lateral Raises (Dumbbell)",
@@ -56,7 +57,7 @@
       "Landmine Shoulder Press",
       "Machine Shoulder Press"
     ],
-    "legs": [
+    "Legs": [
       "Squats (Back)",
       "Squats (Front)",
       "Squats (Goblet)",
@@ -83,7 +84,7 @@
       "Curtsy Lunges (Barbell)",
       "Box Jumps (with weight vest)"
     ],
-    "biceps": [
+    "Biceps": [
       "Barbell Curl",
       "Dumbbell Curl (Hammer)",
       "Dumbbell Curl (Concentration)",
@@ -96,7 +97,7 @@
       "Spider Curl",
       "Zottman Curl"
     ],
-    "triceps": [
+    "Triceps": [
       "Tricep Dips (Weighted)",
       "Tricep Dips (Bodyweight)",
       "Skull Crushers (Barbell)",
@@ -110,7 +111,7 @@
       "Diamond Push-ups (Weighted)",
       "Diamond Push-ups (Bodyweight)"
     ],
-    "core": [
+    "ABS": [
       "Weighted Crunches",
       "Russian Twists (with weight)",
       "Cable Woodchoppers",
@@ -123,7 +124,7 @@
       "Medicine Ball Slams (with weight)",
       "Weighted Sit-ups"
     ],
-    "fullBody": [
+    "FullBody": [
       "Clean and Press (Barbell)",
       "Clean and Press (Dumbbell)",
       "Thrusters (Barbell)",

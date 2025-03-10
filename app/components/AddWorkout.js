@@ -147,14 +147,14 @@ function AddExercise() {
                       required
                     >
                       <option value="">Select Workout Type</option>
-                      <option value="chest">Chest</option>
-                      <option value="back">Back</option>
-                      <option value="shoulder">Shoulder</option>
-                      <option value="biceps">Biceps</option>
-                      <option value="triceps">Triceps</option>
-                      <option value="legs">Leg</option>
-                      <option value="core">Core</option>
-                      <option value="full Body">Full Body</option>
+                      <option value="Chest">Chest</option>
+                      <option value="Back">Back</option>
+                      <option value="Shoulder">Shoulder</option>
+                      <option value="Biceps">Biceps</option>
+                      <option value="Triceps">Triceps</option>
+                      <option value="Legs">Legs</option>
+                      <option value="ABS">ABS</option>
+                      <option value="FullBody">Full Body</option>
                     </select>
                   </div>
                 </div>
