@@ -22,10 +22,6 @@ function AddLog() {
     }
   }, []);
 
-  // Handle the input change for each set
-  const handleChange = (e, exerciseName, index, field) => {
-    const value = e.target.value;
-
     const handleChange = (e, exerciseName, index, field) => {
     const value = e.target.value;
 
