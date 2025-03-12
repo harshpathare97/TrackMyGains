@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import InstallApp from './InstallApp';
 
 const Navbar = () => {
   const [token, setToken] = useState(null);
@@ -16,7 +17,7 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.clear();
     setToken(null);
-    //route.push("/login");
+    route.push("/login");
   };
 
   return (
@@ -34,36 +35,38 @@ const Navbar = () => {
           <Link href="/about" className="text-white hover:text-gray-300 transition duration-200">
             About
           </Link>
+          <InstallApp/>
         </div>
 
         {/* Desktop Buttons */}
-        {!token ? (
-          <div className="hidden md:flex space-x-6">
-            <Link href="/login" className="bg-white text-black px-4 py-2 rounded-lg shadow-lg hover:bg-gray-400 transition duration-200">
-              Login
-            </Link>
-            <Link href="/signup" className="bg-blue-600 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-blue-500 transition duration-200">
-              Signup
-            </Link>
-          </div>
-        ) : (
-          <div className="hidden md:flex space-x-6">
+        <div className="hidden md:flex space-x-6">
+          {!token ? (
+            <>
+              <Link href="/login" className="bg-white text-black px-4 py-2 rounded-lg shadow-lg hover:bg-gray-400 transition duration-200">
+                Login
+              </Link>
+              <Link href="/signup" className="bg-blue-600 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-blue-500 transition duration-200">
+                Signup
+              </Link>
+            </>
+          ) : (
             <Link href='/login' onClick={handleLogout} className="bg-blue-600 text-white px-4 py-2 ml-24 mx-1 rounded-lg shadow-lg hover:bg-blue-500 transition duration-200">
               Logout
             </Link>
-          </div>
-        )}
+          )}
+        </div>
       </nav>
 
       {/* Mobile Menu */}
       <div id="mobileMenu" className='md:hidden bg-slate-700 text-white px-4 py-2 transition-all duration-300 flex justify-between'>
         <div>
-          <Link href="/" className="lg:text-xl mx-2 hover:text-gray-300 transition duration-200">
+          <Link href="/" className="mx-2 hover:text-gray-300 transition duration-200">
             Home
           </Link>
-          <Link href="/about" className="lg:text-xl mx-2 hover:text-gray-300 transition duration-200">
+          <Link href="/about" className="mx-2 hover:text-gray-300 transition duration-200">
             About
           </Link>
+          <InstallApp />
         </div>
         <div>
           {!token ? (

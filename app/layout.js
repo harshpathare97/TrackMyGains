@@ -3,12 +3,11 @@ import Footer from "./components/Footer";
 import Head from "next/head";
 import { MyProvider } from './context/MyContext';
 import ShowNavbar from "./components/ShowNavbar";
-import Offline from './components/Offline'; 
-import InstallPrompt from './components/InstallPrompt';
 
 export const metadata = {
   title: "TrackMyGains",
   description: "TrackMyGains is a simple app to track your fitness progress.",
+  manifest: '/manifest.json', 
 };
 
 export default function RootLayout({ children }) {
@@ -24,8 +23,6 @@ export default function RootLayout({ children }) {
         <MyProvider>
         <div className="flex flex-col min-h-screen">
           <ShowNavbar/>
-          <Offline />
-          <InstallPrompt /> 
           {children}
           <Footer />
         </div>
