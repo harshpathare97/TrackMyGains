@@ -5,7 +5,7 @@ function AddExercise() {
   const { addWorkout, editWorkout, data, setData, setError, modalOpen, openModal, closeModal } = useMyContext();
   const [previousList, setPreviousList] = useState([]);
   const [exercisesList, setExercisesList] = useState({});
-  const [etype, setEtype] = useState(''); 
+  const [etype, setEtype] = useState('All'); 
   const [workout, setWorkout] = useState({
     workoutName: '',
     exercises: [],
@@ -75,8 +75,7 @@ function AddExercise() {
       alert('Please select a workout type and at least one exercise.');
       return;
     }
-    const workoutName = workout.workoutName;
-    const exercises = workout.exercises;
+
     const id = data.id;
     if (!data.exercises) {
       // addWorkout(workoutName, exercises);
@@ -108,17 +107,16 @@ function AddExercise() {
         <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50" onClick={() => { closeModal(); setData([]); }}>
           <div className="modal-dialog text-black bg-white rounded-lg shadow-xl p-6 w-full sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl"
             onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header flex justify-between items-center border-b p-2">
-              <h5 className="modal-title text-2xl font-semibold text-gray-800">{data.exercises ? 'Edit Workout' : 'Add Workout'}</h5>
+            <div className="flex justify-between items-center border-b p-2">
+              <h5 className="text-2xl font-semibold text-gray-800">{data.exercises ? 'Edit Workout' : 'Add Workout'}</h5>
               <button type="button" className="text-gray-500 hover:text-gray-700" onClick={() => { closeModal(); setData([]); }}>
                 <span className="text-2xl">&times;</span>
               </button>
             </div>
             <div className="modal-body p-2 space-y-4">
               <form className="my-3">
-                {/* Workout Type */}
                 <div className="mb-4">
-                  <label htmlFor="workoutType" className="text-gray-700 text-sm font-medium">
+                  <label htmlFor="workoutType" className="text-black text-sm font-medium">
                     Enter Workout
                   </label>
                   <input
@@ -132,21 +130,20 @@ function AddExercise() {
                   />
                 </div>
 
-                {/* Workout Type Dropdown */}
                 <div className="mb-4 justify-start flex">
                   <div className="flex items-center space-x-3">
-                    <label htmlFor="etype" className="text-gray-700 text-sm font-medium">
-                      Select Workout Type
+                    <label htmlFor="etype" className="text-black text-sm font-medium">
+                    Filter Exercises by Muscle Group
                     </label>
                     <select
                       className="px-4 py-2 mt-1 h-10 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
                       id="etype"
                       name="etype"
-                      value={etype}  // Using the separate etype state
+                      value={etype}
                       onChange={onChange}
                       required
                     >
-                      <option value="">Select Workout Type</option>
+                      <option value="All">All</option>
                       <option value="Chest">Chest</option>
                       <option value="Back">Back</option>
                       <option value="Shoulder">Shoulder</option>
@@ -159,10 +156,9 @@ function AddExercise() {
                   </div>
                 </div>
 
-                {/* Exercises */}
                 {etype && (
                   <div className="mb-4">
-                    <label className="text-gray-700 text-sm font-medium">Select Exercises</label>
+                    <label className="text-black text-sm font-medium">Select Exercises</label>
                     <div className="space-y-2 mt-2 overflow-y-auto lg:max-h-40 max-h-52 border border-gray-300 rounded-md p-2">
                       {exercisesList[etype]?.map((exerciseItem, index) => (
                         <div key={index} className="flex items-center space-x-3">
@@ -175,7 +171,7 @@ function AddExercise() {
                             checked={workout.exercises.includes(exerciseItem)}
                             className="h-5 w-5 text-indigo-500 border-gray-300 rounded focus:ring-indigo-500"
                           />
-                          <label htmlFor={`exercise-${exerciseItem}`} className="text-gray-700 text-sm">
+                          <label htmlFor={`exercise-${exerciseItem}`} className="text-gray-900 text-sm">
                             {exerciseItem}
                           </label>
                         </div>

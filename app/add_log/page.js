@@ -22,22 +22,22 @@ function AddLog() {
     }
   }, []);
 
-    const handleChange = (e, exerciseName, index, field) => {
+  const handleChange = (e, exerciseName, index, field) => {
     const value = e.target.value;
 
-    // Allow numbers up to 3 digits with optional 1 decimal place, no leading zeros, no single "0"
-    if (/^([1-9]\d{0,2})(\.\d{0,1})?$/.test(value)) {
-        const updatedExercises = logs.map((exercise) => {
-            if (exercise.exercise_name === exerciseName) {
-                const updatedSets = [...exercise.sets];
-                updatedSets[index][field] = value;
-                return { ...exercise, sets: updatedSets };
-            }
-            return exercise;
-        });
-        setLogs(updatedExercises);
+    // Allow empty value for erasing and numbers up to 3 digits with optional 1 decimal place, no leading zeros, no single "0"
+    if (value === '' || /^([1-9]\d{0,2})(\.\d{0,1})?$/.test(value)) {
+      const updatedExercises = logs.map((exercise) => {
+        if (exercise.exercise_name === exerciseName) {
+          const updatedSets = [...exercise.sets];
+          updatedSets[index][field] = value;
+          return { ...exercise, sets: updatedSets };
+        }
+        return exercise;
+      });
+      setLogs(updatedExercises);
     }
-};
+  };
 
   // Add a new set to the exercise
   const handleAddSet = (exerciseName) => {
@@ -106,8 +106,8 @@ function AddLog() {
                   <div className="flex flex-col justify-between h-full">
                     <div>
                       <div className='flex justify-between'>
-                      <h5 className="text-2xl font-semibold text-gray-800">{exercise.exercise_name}</h5>
-                      <button
+                        <h5 className="text-2xl font-semibold text-gray-800">{exercise.exercise_name}</h5>
+                        <button
                           onClick={() => handleRemoveExercise(exercise.exercise_name)}
                           className=" text-red-500 w-10 h-10 px-2 py-1 rounded-md hover:bg-red-500 hover:text-white"
                         >
@@ -127,7 +127,7 @@ function AddLog() {
                             {exercise.sets.map((set, index) => (
                               <tr key={index}>
                                 <td>
-                                  <label className="text-gray-700">Set {index + 1}:</label>
+                                  <label>Set {index + 1}:</label>
                                 </td>
                                 <td>
                                   <input
