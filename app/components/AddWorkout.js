@@ -32,13 +32,11 @@ function AddExercise() {
         workoutName: data?.workoutName || '',
         exercises: data?.exercises || [],
       });
-      // setEtype(data?.workoutName || '');
     } else {
       setWorkout({
         workoutName: '',
         exercises: [],
       });
-      // setEtype('');
     }
   }, [data]);
 
@@ -78,15 +76,14 @@ function AddExercise() {
 
     const id = data.id;
     if (!data.exercises) {
-      // addWorkout(workoutName, exercises);
       addWorkout(workout);
       setWorkout({ workoutName: '', exercises: [] });
-      setEtype('');
+      setEtype('All');
     } else {
       const { deleteExercises, updateExercises } = processList(previousList, workout.exercises);
       editWorkout(id, workout, deleteExercises, updateExercises);
       setWorkout({ workoutName: '', exercises: [] });
-      setEtype('');
+      setEtype('All');
     }
   };
 
