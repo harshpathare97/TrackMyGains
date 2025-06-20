@@ -68,24 +68,31 @@ function AddExercise() {
     return { deleteExercises, updateExercises };
   };
 
-  const handleSave = () => {
-    if (!workout.workoutName || workout.exercises.length === 0) {
-      alert('Please select a workout type and at least one exercise.');
-      return;
-    }
+  const handleSave = async () => {
+  if (!workout.workoutName || workout.exercises.length === 0) {
+    alert('Please select a workout type and at least one exercise.');
+    return;
+  }
 
-    const id = data.id;
+  const id = data.id;
+
+  try {
     if (!data.exercises) {
-      addWorkout(workout);
-      setWorkout({ workoutName: '', exercises: [] });
-      setEtype('All');
+      await addWorkout(workout); // assuming async
     } else {
       const { deleteExercises, updateExercises } = processList(previousList, workout.exercises);
-      editWorkout(id, workout, deleteExercises, updateExercises);
-      setWorkout({ workoutName: '', exercises: [] });
-      setEtype('All');
+      await editWorkout(id, workout, deleteExercises, updateExercises); // assuming async
     }
-  };
+
+    // Reset form after successful save
+    setWorkout({ workoutName: '', exercises: [] });
+    setEtype('All');
+  } catch (error) {
+    console.error('Error saving workout:', error);
+    alert('Failed to save workout. Please try again.');
+  }
+};
+
 
   return (
     <>
@@ -102,7 +109,7 @@ function AddExercise() {
       {/* Modal */}
       {modalOpen && (
         <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50" onClick={() => { closeModal(); setData([]); }}>
-          <div className="modal-dialog text-black bg-white rounded-lg shadow-xl p-6 w-full sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl"
+          <div className="text-black bg-white rounded-lg shadow-xl p-6 w-full sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl"
             onClick={(e) => e.stopPropagation()}>
             <div className="flex justify-between items-center border-b p-2">
               <h5 className="text-2xl font-semibold text-gray-800">{data.exercises ? 'Edit Workout' : 'Add Workout'}</h5>
@@ -110,7 +117,7 @@ function AddExercise() {
                 <span className="text-2xl">&times;</span>
               </button>
             </div>
-            <div className="modal-body p-2 space-y-4">
+            <div className="p-2 space-y-4">
               <form className="my-3">
                 <div className="mb-4">
                   <label htmlFor="workoutType" className="text-black text-sm font-medium">
