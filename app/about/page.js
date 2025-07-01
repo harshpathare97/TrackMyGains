@@ -28,7 +28,8 @@ function About() {
               <ul className="list-disc list-inside text-left text-lg text-gray-700 space-y-2">
                 <li>Click the signup button and create an account.</li>
                 <li>Click on "Add Exercise," enter the workout name (e.g., Chest workout, Push workout), choose the exercise you want to perform, and click the save button.</li>
-                <li>After saving the workout, you will see it on the home screen. Click on the "Add Log" button to log your workout for the day, and click "Save" to save the log.</li>
+                <li>After saving the workout, you will see it on the home screen. Click on the "Add Log" button to log your workout for the day.</li>
+                <li>"Save" button to save the log locally and "Upload" button to upload log on cloud</li>
                 <li>Click on the "Gains" button to view your progress. By clicking on an exercise, a dropdown menu will allow you to select a different exercise.</li>
                 <li>Log your daily workout and stay motivated by tracking your results.</li>
               </ul>

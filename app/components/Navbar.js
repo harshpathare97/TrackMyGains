@@ -2,23 +2,16 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import InstallApp from './InstallApp';
+import Profile from './Profile';
 
 const Navbar = () => {
   const [token, setToken] = useState(null);
-  const route = useRouter();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     setToken(token);
   }, []);
-
-  const handleLogout = () => {
-    localStorage.clear();
-    setToken(null);
-    route.push("/login");
-  };
 
   return (
     <header id="navbar" className="bg-slate-900 sticky top-0 z-50 shadow-lg">
@@ -50,9 +43,7 @@ const Navbar = () => {
               </Link>
             </>
           ) : (
-            <Link href='/login' onClick={handleLogout} className="bg-blue-600 text-white px-4 py-2 ml-24 mx-1 rounded-lg shadow-lg hover:bg-blue-500 transition duration-200">
-              Logout
-            </Link>
+            <Profile/>
           )}
         </div>
       </nav>
@@ -74,9 +65,7 @@ const Navbar = () => {
               Signup
             </Link>
           ) : (
-            <Link href='/login' onClick={handleLogout} className="bg-blue-600 text-white px-2 py-1 mx-1 rounded-lg shadow-lg hover:bg-blue-500 transition duration-200">
-              Logout
-            </Link>
+            <Profile/>
           )}
         </div>
       </div>

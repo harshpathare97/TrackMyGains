@@ -11,11 +11,13 @@ import { syncLogsToServer } from "@/lib/indexedDb";
 
 export default function Home() {
   const {
+    fetchUser,
     fetchWorkouts,
     deleteWorkout,
     setData,
     workouts,
     error,
+    setError,
     setAlert,
     openModal,
     loading,
@@ -24,6 +26,7 @@ export default function Home() {
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
+      fetchUser()
       fetchWorkouts();
       if (navigator.serviceWorker.controller) {
         navigator.serviceWorker.controller.postMessage({
@@ -31,7 +34,6 @@ export default function Home() {
           token: localStorage.getItem("token"),
         });
         if (navigator.onLine) {
-          // Sync immediately
           syncLogsToServer(); 
         }
       }
@@ -39,7 +41,7 @@ export default function Home() {
       route.push("/login");
     }
   }, []);
-
+  
   const handleDelete = async (id) => {
     deleteWorkout(id);
   };
@@ -79,13 +81,12 @@ export default function Home() {
         <div className="flex flex-col justify-center items-center">
           {error ? (
             <>
-              <p className="text-red-500 text-xl font-semibold">{error}</p>
               <p className="text-red-500 text-xl font-semibold">
                 Something went wrong! Please try again later.
               </p>
               <button
                 className="bg-blue-500 text-white mt-2 px-6 py-2 rounded-lg shadow-md hover:bg-blue-400 transition duration-200"
-                onClick={fetchWorkouts}
+                onClick={() => {fetchUser; fetchWorkouts; setError(false)}}
               >
                 Retry
               </button>
@@ -93,7 +94,7 @@ export default function Home() {
           ) : loading ? (
             <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-blue-500" />
           ) : (
-            <div className="container py-1 px-2 lg:px-8">
+            <div className="container py-1 px-2 lg:px-8 html dark">
               <div className="w-full mx-auto lg:w-11/12 lg:bg-white lg:shadow-lg rounded-lg lg:p-8">
                 <h1 className="text-4xl font-bold text-center text-gray-900 mb-6">
                   Workouts

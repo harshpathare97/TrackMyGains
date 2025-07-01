@@ -18,7 +18,7 @@ export const GET = authenticate(async (req) => {
     return new Response(JSON.stringify({ result }), { status: 200 })
   } catch (error) {
     console.error(error);
-    return new Response(JSON.stringify({ error: "Internal server error. Please try again later." }), { status: 500 });
+    return new Response(JSON.stringify({ error: "Oops! Somethings went wrong on our end. We're working on it." }), { status: 500 });
   }
 })
 
@@ -33,7 +33,7 @@ export const POST = authenticate(async (req) => {
   const userWorkouts = await WorkoutLog.find({ user: req.user.id });
   if (userWorkouts.length >= 6) {
       return new Response(
-        JSON.stringify({ error: "You can only have up to 6 workouts." }),
+        JSON.stringify({ error: "You can only have up to 6 workouts.", type: "warning" }),
         { status: 400 }
       );
     }
@@ -65,7 +65,7 @@ export const POST = authenticate(async (req) => {
     );
   } catch (error) {
     console.error(error);
-    return new Response(JSON.stringify({ error: "Internal server error. Please try again later." }), { status: 500 });
+    return new Response(JSON.stringify({ error: "Something went wrong. Please try again later." }), { status: 500 });
   }
 })
 
@@ -120,7 +120,7 @@ export const PUT = authenticate(async (req) => {
   } catch (error) {
     console.error(error);
     return new Response(
-      JSON.stringify({ error: 'Internal server error. Please try again later.' }),
+      JSON.stringify({ error: "Something went wrong. Please try again later."}),
       { status: 500 }
     );
   }
@@ -144,6 +144,6 @@ export const DELETE = authenticate(async (req) => {
     return new Response(JSON.stringify({ message: 'Workout deleted successfully', success }), { status: 200 });
   } catch (error) {
     console.error(error);
-    return new Response(JSON.stringify({ error: "Internal server error. Please try again later." }), { status: 500 });
+    return new Response(JSON.stringify({ error: "Something went wrong. Please try again later." }), { status: 500 });
   }
 })

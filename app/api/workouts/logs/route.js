@@ -39,7 +39,7 @@ export const POST = authenticate(async (req) => {
   } catch (error) {
     console.error(error);
     return new Response(
-      JSON.stringify({ error: 'Something went wrong! Please try again later.' }),
+      JSON.stringify({ error: "Something went wrong. Please try again later." }),
       { status: 500 }
     );
   }

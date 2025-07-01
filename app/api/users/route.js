@@ -14,7 +14,7 @@ export const GET = authenticate(async (req) => {
   return new Response(JSON.stringify({message: "Fetch User Successfully", user}),{ status: 200 });
 } catch (error) {
   console.error(error);
-  return new Response(JSON.stringify({ error: "Internal server error. Please try again later." }), { status: 500 });
+  return new Response(JSON.stringify({ error: "Failed to load data. Check your connection" }), { status: 500 });
 }
 });
 
@@ -27,7 +27,7 @@ export async function POST(req) {
       // Check if the user already exists
       const user = await User.findOne({ email });
       if (user) {
-        return new Response(JSON.stringify({ error: "User already exists" }),{status:400});
+        return new Response(JSON.stringify({ error: "User already exists", type: "warning" }),{status:400});
       }
   
       const salt = await bcrypt.genSalt(10);
@@ -43,7 +43,7 @@ export async function POST(req) {
       return new Response(JSON.stringify({ message: "User created successfully", authtoken,success }),{status:200});
     } catch (error) {
       console.error(error);
-      return new Response(JSON.stringify({ error: "Internal server error. Please try again later." }),{status:500});
+      return new Response(JSON.stringify({ error: "Something went wrong. Please try again later." }),{status:500});
     }
   };
 
@@ -75,6 +75,6 @@ export async function PUT(req) {
       return new Response(JSON.stringify({message: "Logged in Successfully", authtoken, success }),{status:200}); // Send the token to the client
     } catch (error) {
       console.error(error);
-      return new Response(JSON.stringify({ error: "Internal server error. Please try again later." }),{status:500});
+      return new Response(JSON.stringify({ error: "Something went wrong. Please try again later." }),{status:500});
     }
   };
